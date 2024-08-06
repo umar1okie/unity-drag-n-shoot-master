@@ -81,11 +81,15 @@ public class Reticle : MonoBehaviour
     public void Deselect()
     {
         selectedObject = null;
-        for (int i = 0; i < points.Count; i++)
+        if (gameObject.activeInHierarchy)
         {
-            StartCoroutine(LerpObject(points[i], Vector3.zero, deselectAnimTime));
+            for (int i = 0; i < points.Count; i++)
+            {
+                StartCoroutine(LerpObject(points[i], Vector3.zero, deselectAnimTime));
+            }
         }
     }
+
 
     private void FireProjectiles()
     {
