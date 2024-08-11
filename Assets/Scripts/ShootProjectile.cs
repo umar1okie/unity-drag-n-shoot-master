@@ -8,8 +8,13 @@ public class ShootProjectile : MonoBehaviour
     [SerializeField] private float speed;
     public void FireProjectile()
     {
+
+        // Instantiate the projectile at the cannon hole's position
         GameObject projectile = Instantiate(point, null);
         projectile.transform.position = this.transform.position;
-        projectile.GetComponent<Rigidbody2D>().AddRelativeForce(-this.transform.right * speed);
+
+        // Apply force to launch the projectile
+        Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
+        rb.AddRelativeForce(-this.transform.right * speed);
     }
 }
