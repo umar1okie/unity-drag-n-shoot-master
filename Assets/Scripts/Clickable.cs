@@ -5,6 +5,7 @@ using UnityEngine;
 public class Clickable : MonoBehaviour
 {
     [SerializeField] private Reticle reticleManager;
+    [SerializeField] private Transform cannonHole; // Reference to the cannon's hole
 
     private void Update()
     {
@@ -43,5 +44,11 @@ public class Clickable : MonoBehaviour
         {
             reticleManager.Deselect();
         }
+    }
+
+    // Provide a method to get the cannon hole position
+    public Transform GetCannonHole()
+    {
+        return cannonHole;
     }
 }

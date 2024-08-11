@@ -64,11 +64,14 @@ public class Reticle : MonoBehaviour
     public void Selected(GameObject selected)
     {
         this.gameObject.SetActive(true);
-        this.transform.position = selected.transform.position;
+        Transform cannonHole = selected.GetComponent<Clickable>().GetCannonHole();
+        this.transform.position = cannonHole.position; // Align reticle with cannon hole
         selectedObject = selected;
+
         Vector3 inputPos = GetInputPosition();
         Vector3 inputWorldPos = Camera.main.ScreenToWorldPoint(inputPos);
         Vector3 inputPosRelative = inputWorldPos - this.transform.position;
+
         for (int i = 0; i < points.Count; i++)
         {
             HandleRotation(points[i].gameObject);
@@ -90,7 +93,6 @@ public class Reticle : MonoBehaviour
         }
     }
 
-
     private void FireProjectiles()
     {
         for (int i = 0; i < launchPoints.Count; i++)
@@ -99,6 +101,7 @@ public class Reticle : MonoBehaviour
         }
         this.gameObject.SetActive(false);
     }
+
 
     private int count = 0;
     private IEnumerator LerpObject(GameObject item, Vector3 pos, float time)
